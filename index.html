@@ -1,100 +1,181 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<!-- Meta Tags para Facebook -->
-<meta property="og:title" content="Cardápio do Restaurante">
-<meta property="og:description" content="Explore o nosso delicioso cardápio com pratos variados e apetitosos. Confira agora!">
-<meta property="og:image" content="https://kraskin-websites.github.io/cardapio-restaurante/css/img/img3.jpg">
-<meta property="og:url" content="https://github.com/Kraskin-Websites/cardapio-restaurante">
-<meta property="og:type" content="website">
-
-<!-- Meta Tags para Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Cardápio do Restaurante">
-<meta name="twitter:description" content="Explore o nosso delicioso cardápio com pratos variados e apetitosos. Confira agora!">
-<meta name="twitter:image" content="path/to/preview-image.jpg">
-<meta name="twitter:url" content="https://www.seusite.com/cardapio">
-
-
-
-<meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cardápio do Restaurante</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>Açaí Sabor do Verão</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F3E5F5; /* Lilás claro */
+            color: #4B0082; /* Roxo escuro */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #7B1FA2; /* Roxo médio */
+            padding: 15px;
+            text-align: center;
+            color: #FFF;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .menu-item {
+            background-color: #D1C4E9; /* Lilás mais claro */
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .menu-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+        .menu-item img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+        }
+        .menu-item h3 {
+            margin: 10px 0;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup {
+            background-color: #FFF;
+            color: #4B0082;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .popup h3 {
+            margin-bottom: 15px;
+        }
+        .ingredients {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .ingredients label {
+            background-color: #7B1FA2;
+            color: #FFF;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .ingredients input {
+            display: none;
+        }
+        .ingredients input:checked + label {
+            background-color: #4B0082;
+        }
+        .close-btn, .order-btn {
+            background-color: #4B0082;
+            color: #FFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .close-btn:hover, .order-btn:hover {
+            background-color: #7B1FA2;
+        }
+    </style>
 </head>
 <body>
-    <div class="menu-container">
-        <h1 class="menu-title">Cardápio do Restaurante</h1>
-        <div class="menu-grid">
-            <div class="menu-item">
-                <img src="./css/img/img1.jpg" alt="Prato 1" class="menu-item-image">
-                <div class="menu-item-details">
-                    <h2 class="menu-item-title">Prato 1</h2>
-                    <p class="menu-item-description">Descrição deliciosa do prato 1.</p>
-                    <p class="menu-item-price">R$ 30,00</p>
-                </div>
+    <header>
+        <h1>Açaí Sabor do Verão</h1>
+    </header>
+    <main>
+        <section class="menu">
+            <div class="menu-item" onclick="openPopup('Pequeno')">
+                <img src="acai-pequeno.jpg" alt="Açaí Pequeno">
+                <h3>Pequeno</h3>
             </div>
-            <div class="menu-item">
-                <img src="./css/img/img2.jpg" alt="Prato 2" class="menu-item-image">
-                <div class="menu-item-details">
-                    <h2 class="menu-item-title">Prato 2</h2>
-                    <p class="menu-item-description">Descrição deliciosa do prato 2.</p>
-                    <p class="menu-item-price">R$ 35,00</p>
-                </div>
+            <div class="menu-item" onclick="openPopup('Médio')">
+                <img src="acai-medio.jpg" alt="Açaí Médio">
+                <h3>Médio</h3>
             </div>
-            <div class="menu-item">
-                <img src="./css/img/img3.jpg" alt="Prato 3" class="menu-item-image">
-                <div class="menu-item-details">
-                    <h2 class="menu-item-title">Prato 3</h2>
-                    <p class="menu-item-description">Descrição deliciosa do prato 3.</p>
-                    <p class="menu-item-price">R$ 40,00</p>
-                </div>
+            <div class="menu-item" onclick="openPopup('Grande')">
+                <img src="acai-grande.jpg" alt="Açaí Grande">
+                <h3>Grande</h3>
             </div>
+        </section>
+    </main>
 
-            <div class="menu-item">
-                <img src="./css/img/img3.jpg" alt="Prato 3" class="menu-item-image">
-                <div class="menu-item-details">
-                    <h2 class="menu-item-title">Prato 4</h2>
-                    <p class="menu-item-description">Descrição deliciosa do prato 4</p>
-                    <p class="menu-item-price">R$ 40,00</p>
-                </div>
+    <div class="overlay" id="popup">
+        <div class="popup">
+            <h3 id="size-title"></h3>
+            <p>Selecione até 4 ingredientes:</p>
+            <div class="ingredients">
+                <input type="checkbox" id="banana" name="ingredient" value="Banana">
+                <label for="banana">Banana</label>
+                <input type="checkbox" id="granola" name="ingredient" value="Granola">
+                <label for="granola">Granola</label>
+                <input type="checkbox" id="leite-condensado" name="ingredient" value="Leite Condensado">
+                <label for="leite-condensado">Leite Condensado</label>
+                <input type="checkbox" id="morango" name="ingredient" value="Morango">
+                <label for="morango">Morango</label>
+                <input type="checkbox" id="chocolate" name="ingredient" value="Chocolate">
+                <label for="chocolate">Chocolate</label>
             </div>
-
-            <div class="menu-item">
-                <img src="./css/img/img1.jpg" alt="Prato 1" class="menu-item-image">
-                <div class="menu-item-details">
-                    <h2 class="menu-item-title">Prato 5</h2>
-                    <p class="menu-item-description">Descrição deliciosa do prato 5</p>
-                    <p class="menu-item-price">R$ 30,00</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="./css/img/img2.jpg" alt="Prato 2" class="menu-item-image">
-                <div class="menu-item-details">
-                    <h2 class="menu-item-title">Prato 6</h2>
-                    <p class="menu-item-description">Descrição deliciosa do prato 6</p>
-                    <p class="menu-item-price">R$ 35,00</p>
-                </div>
-            </div>
-            <div class="menu-item">
-                <img src="./css/img/img3.jpg" alt="Prato 3" class="menu-item-image">
-                <div class="menu-item-details">
-                    <h2 class="menu-item-title">Prato 7</h2>
-                    <p class="menu-item-description">Descrição deliciosa do prato 7</p>
-                    <p class="menu-item-price">R$ 40,00</p>
-                </div>
-            </div>
-  <!-- Adicione mais itens do menu conforme necessário -->
-            <div class="menu-item">
-                <img src="./css/img/img3.jpg" alt="Prato 3" class="menu-item-image">
-                <div class="menu-item-details">
-                    <h2 class="menu-item-title">Prato 8</h2>
-                    <p class="menu-item-description">Descrição deliciosa do prato 8</p>
-                    <p class="menu-item-price">R$ 40,00</p>
-                </div>
-            </div>
-            <!-- Adicione mais itens do menu conforme necessário -->
+            <p>Quantidade de copos:</p>
+            <input type="number" id="quantity" min="1" value="1" style="width: 50px; text-align: center;">
+            <br>
+            <button class="close-btn" onclick="closePopup()">Fechar</button>
+            <button class="order-btn" onclick="submitOrder()">Confirmar Pedido</button>
         </div>
     </div>
+
+    <script>
+        function openPopup(size) {
+            document.getElementById('popup').style.display = 'flex';
+            document.getElementById('size-title').innerText = `Tamanho: ${size}`;
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function submitOrder() {
+            const ingredients = Array.from(document.querySelectorAll('input[name="ingredient"]:checked'))
+                .map(input => input.value);
+            if (ingredients.length > 4) {
+                alert('Você só pode selecionar até 4 ingredientes.');
+                return;
+            }
+            const quantity = document.getElementById('quantity').value;
+            const size = document.getElementById('size-title').innerText.split(': ')[1];
+            const message = `Olá, gostaria de pedir um açaí de tamanho ${size}.\nQuantidade: ${quantity} copo(s).\nIngredientes: ${ingredients.join(', ')}.`;
+            const whatsappNumber = "5581987654321"; // Substitua pelo número de WhatsApp do seu estabelecimento
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+            closePopup();
+        }
+    </script>
 </body>
 </html>
